@@ -1,0 +1,75 @@
+{%  extends 'todolistapp/base.html' %}
+{% load static %}
+{% block content %}
+
+    {# create the form to register taskers  #}
+
+
+<div id="form1">
+    <form action="{% url 'add_tasker' %}" method="post">
+        <h5 id="add1"> Add a Tasker </h5>
+    {% csrf_token %}
+        <input class="form-control" type="text" name="user_tasker" placeholder="Tasker Name ">
+        <br>
+        <input class="form-control" type="email" name="user_email" placeholder="Email">
+        <br>
+        <div class="d-grid gap-2">
+    <button type="submit" class="btn btn-primary" >Add Tasker</button>
+        </div>
+    </form>
+    </div >
+    <br>
+    <br>
+{# form : action attribute represents the file to process this form  #}
+
+    <div id="form2">
+    <form style="cursor: pointer" action="{% url 'add_task' %}" method="post">
+     <h5 id="add2">Add a Task</h5>
+        {% csrf_token %}
+        <input class="form-control" type="text" name="task" placeholder="New Task">
+        <br>
+        {# this is the taskers dropdown#}
+        <select class="form-control" name="tasker" >
+            <option value="">Select a Tasker</option>
+            {% for tasker in taskers %}
+                <option value="{{ tasker.id }}">
+                    {{ tasker.username }}
+                </option>
+            {% endfor %}
+        </select>
+        <br>
+    <div class="d-grid gap-2">
+        <button type="submit" class="btn btn-success"> Add Task</button>
+    </div>
+        <br>
+
+    </form>
+    </div>
+    <div class="dec">
+<h4>My Tasks</h4>
+    <ul>
+        {% for task in tasks %}
+            <li>
+                {{ task.task }} - completed {{ task.completed }}
+            <div class="span1">
+                <span id="=spann1">Assigned to {{ task.tasker.username }}
+                </span>
+            </div>
+            <span id="span2">
+                 Email to {{ task.tasker.email }}
+            </span>
+                {% if task.completed %}
+                    completed
+            {% else %}
+            <a class="border border-success-subtle" href="{% url 'mark_complete' task.id %}">Mark as Done </a>
+            {% endif %}
+            <a class="border border-danger-subtle" href="{% url 'delete_task' task.id %}">Delete This Task</a>
+            </li>
+{#  show this on tasks #}
+            {% empty %}
+            <li>NO TASKS AVAILABLE</li>
+        {% endfor %}
+    </ul>
+    </div>
+
+{% endblock%}
