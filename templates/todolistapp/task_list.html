@@ -20,6 +20,10 @@
     </div >
     <br>
     <br>
+    {# activating the logout #}
+    <span>
+    <a href="{% url 'logout' %}">Logout</a>
+    </span>
 {# form : action attribute represents the file to process this form  #}
 
     <div id="form2">
@@ -49,7 +53,7 @@
 <h4>My Tasks</h4>
     <ul>
         {% for task in tasks %}
-            <li>
+            <button>
                 {{ task.task }} - completed {{ task.completed }}
             <div class="span1">
                 <span id="=spann1">Assigned to {{ task.tasker.username }}
@@ -61,7 +65,7 @@
                 {% if task.completed %}
                     completed
             {% else %}
-            <a class="border border-success-subtle" href="{% url 'mark_complete' task.id %}">Mark as Done </a>
+                    <button <a class="border border-success-subtle" href="{% url 'mark_complete' task.id %}">Mark as Done </a>></button>
             {% endif %}
             <a class="border border-danger-subtle" href="{% url 'delete_task' task.id %}">Delete This Task</a>
             </li>

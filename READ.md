@@ -120,3 +120,60 @@ FrontEnd(HTML <CSS (web), Android(jetpack compose), React Native, Reactjs) =>
 EMOBILIS DATABASE: -student table: name,role,phone,student id
                    -staff table: name,role,phone, staff id
                    -assets: name,price,serial number
+
+### TESTS
+1. http://127.8.0.1:8000/ :: web app
+2. http://127.8.0.1:8000/api/tasks/ :: API project
+3. http://127.8.0.1:8000/admin :: Admin project 
+
+
+sighn up to postman.com and create an account. Log in to the account
+
+-click on the link for workspace/ if its not there then create a work space. once created select
+ a blank workspace ( write the name of the workspace: django API)
+select internal then create
+make sure you download a postman
+
+1. search for postman desktop agent
+-clickpostman agent then download for windows/ set up file
+-Do not install anything, don't change anything just select next until it installs
+2. download insomnia app/ insomnia.rest
+-select hobby
+- select to hobby package
+-then look for app itself and download it then install it
+- do not change anythin when installing it, just click next until it installs
+
+### AUTHENTICATION AND AUTHORIZATION
+- Authentication :: IDENTITY MANAGEMENT :: WHO IS USING THE TASK
+- Authorization :: USER PRIVILEDGES :: WHAT USER CAN DO ONCE AUTHENTICATED
+
+### STEPS IN CREATING AN AUTHENTICATION MODULE
+1. Within settings.py of the project modify the authentication settings
+   a. LOGIN_URL :: redirect unauthenticated users back to the log in screen
+   b. LOGIN_REDIRECT_URL :: ## After log in what page will the user see
+   c. LOGOUT_REDIRECT_URL :: ## After logout, redirect user to log in screen
+2. Create views function for the register, login and logout processes
+3. create the rendered/ redirected templates
+4. Register the urls to map to the authentication functions in views
+5. Do migrations :: python manage.py migrate
+
+### EXTENDING THE DJANGO AUTH MODEL
+1. Import the class AbstractUser in our models.py
+2. Create the custom user class, name should be CustomUser
+3. Tell django to use the custom model for the user :: settings.py
+4. Update our forms to also use the custom model
+   a. create a forms.py in the app folder, write out our custom user form
+5. Update the views function to use the custom model / form
+6. Updating the templates to reflect the new inputs :: register.html
+7. Ensure that our django can handle media
+   a. inside settings.py media_url, media_root
+   b. urls.py include the media reference as part of the urlpatterns
+8. Reset the database and make new migrations
+    - delete the migrations folder
+    - python manage.py migrate todolistapp zero
+    - python manage.py makemigrations appname
+    - python manage.py migrate
+
+
+
+
